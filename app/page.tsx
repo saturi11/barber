@@ -1,10 +1,12 @@
 "use client"
 
-import { useEffect } from "react";
-import { Button } from "./_components/ui/button";
+import { useEffect } from "react"
+import { Button } from "./_components/ui/button"
+
+const name = "Gabriel"
 
 const Home = () => {
-  return<Button>Home</Button>
+  return <Button>Home</Button>
 }
 
-export default Home;
+export default Home
