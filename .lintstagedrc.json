@@ -1,6 +1,6 @@
 {
-  "*.ts?(x)": [
-    "eslint --fix",
-    "prettier --write"
+  "*.{ts,tsx}": [
+    "node --no-warnings ./node_modules/eslint/bin/eslint.js --fix",
+    "node ./node_modules/prettier/bin/prettier.cjs --write"
   ]
 }
