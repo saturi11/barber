@@ -29,6 +29,23 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+---
+
+## Prisma setup
+
+This project uses Prisma for database access. The connection URL for the
+Prisma CLI (migrations, `db` commands, etc.) is stored in `prisma.config.ts`
+rather than the schema file – the `url` attribute has been removed from
+`schema.prisma` in Prisma v7. Example configuration has already been committed
+and your `.env` file should define `DATABASE_URL`.
+
+Application code should instantiate the client with an `adapter` (direct
+database connection) or `accelerateUrl` (when using Prisma Accelerate). A
+helper file is available at `lib/prisma.ts` with a quick stub you can copy.
+
+See https://pris.ly/d/config-datasource and
+https://pris.ly/d/prisma7-client-config for more details.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
