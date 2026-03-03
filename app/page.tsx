@@ -1,4 +1,4 @@
-import { SearchIcon } from "lucide-react"
+import { DropletIcon, EyeIcon, FootprintsIcon, SearchIcon } from "lucide-react"
 import Header from "./_components/header"
 import { Button } from "./_components/ui/button"
 import { Input } from "./_components/ui/input"
@@ -12,6 +12,11 @@ import BarbershopItem from "./_components/barbershop-item"
 const Home = async () => {
   //chamar banco de dados
   const barbershops = await db.barbershop.findMany({})
+  const popularBarbershops = await db.barbershop.findMany({
+    orderBy: {
+      name: "desc",
+    },
+  })
   console.log(barbershops)
   return (
     <div>
@@ -24,6 +29,53 @@ const Home = async () => {
           <Input placeholder="Faca sua busca..." />
           <Button>
             <SearchIcon />
+          </Button>
+        </div>
+        {/*BUSCA RAPIDA*/}
+        <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+          <Button className="gap-2" variant="secondary">
+            <Image
+              alt="Corte de cabelo"
+              src="/cabelo.svg"
+              width={16}
+              height={16}
+            />
+            Cabelo
+          </Button>
+
+          <Button className="gap-2" variant="secondary">
+            <Image
+              alt="Corte de cabelo"
+              src="/barba.svg"
+              width={16}
+              height={16}
+            />
+            Barba
+          </Button>
+
+          <Button className="gap-2" variant="secondary">
+            <Image
+              alt="Corte de cabelo"
+              src="/acabamento.svg"
+              width={16}
+              height={16}
+            />
+            Acabamento
+          </Button>
+
+          <Button className="gap-2" variant="secondary">
+            <FootprintsIcon className="h-4 w-4" />
+            Pezinho
+          </Button>
+
+          <Button className="gap-2" variant="secondary">
+            <EyeIcon />
+            Sobrancelha
+          </Button>
+
+          <Button className="gap-2" variant="secondary">
+            <DropletIcon />
+            Hidratacao
           </Button>
         </div>
         {/*IMAGEM*/}
@@ -68,9 +120,25 @@ const Home = async () => {
             <BarbershopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
+        <h2 className="pt-4 pb-4 text-xs font-bold text-gray-400 uppercase">
+          Polulares
+        </h2>
+        <div className="py-6] flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {popularBarbershops.map((barbershop) => (
+            <BarbershopItem key={barbershop.id} barbershop={barbershop} />
+          ))}
+        </div>
       </div>
+      <footer>
+        <Card>
+          <CardContent>
+            <p className="px-5 py-6 text-sm text-gray-400">
+              2026 Copyright Full Barber
+            </p>
+          </CardContent>
+        </Card>
+      </footer>
     </div>
   )
 }
-
 export default Home
