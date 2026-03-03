@@ -5,6 +5,7 @@ import { ChevronLeftIcon, MapPin, MenuIcon, StarIcon } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import ServiceItem from "@/app/_components/serviceItem"
+import PhoneItem from "@/app/_components/phone-item"
 
 // Define o tipo das props da página.
 // No Next 15+, `params` é uma Promise.
@@ -78,7 +79,7 @@ const BarbershopPage = async ({ params }: PageProps) => {
         <p className="text-justify text-sm">{barbershop?.description}</p>
       </div>
       {/*Serviços*/}
-      <div className="p-5">
+      <div className="border-b border-solid p-5">
         <h2 className="mb-3 text-xs font-bold text-gray-400 uppercase">
           Servicos{" "}
         </h2>
@@ -87,6 +88,11 @@ const BarbershopPage = async ({ params }: PageProps) => {
             <ServiceItem key={service.id} service={service} />
           ))}
         </div>
+      </div>
+      <div className="space-y-3 p-5">
+        {barbershop?.phones.map((phone) => (
+          <PhoneItem key={phone} phone={phone} />
+        ))}
       </div>
     </div>
   )
