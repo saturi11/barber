@@ -4,6 +4,7 @@ import { Button } from "@/app/_components/ui/button"
 import { ChevronLeftIcon, MapPin, MenuIcon, StarIcon } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import ServiceItem from "@/app/_components/serviceItem"
 
 // Define o tipo das props da página.
 // No Next 15+, `params` é uma Promise.
@@ -22,6 +23,9 @@ const BarbershopPage = async ({ params }: PageProps) => {
   const barbershop = await db.barbershop.findUnique({
     where: {
       id: id,
+    },
+    include: {
+      services: true, // Inclui os serviços relacionados à barbearia
     },
   })
 
@@ -70,8 +74,19 @@ const BarbershopPage = async ({ params }: PageProps) => {
       </div>
       {/*Desc*/}
       <div className="space-y-3 border-b border-solid p-5">
-        <h2 className="text-xs font-bold text-gray-400 uppercase">Sobre :</h2>
+        <h2 className="text-xs font-bold text-gray-400 uppercase">Sobre </h2>
         <p className="text-justify text-sm">{barbershop?.description}</p>
+      </div>
+      {/*Serviços*/}
+      <div className="p-5">
+        <h2 className="mb-3 text-xs font-bold text-gray-400 uppercase">
+          Servicos{" "}
+        </h2>
+        <div className="space-y-3">
+          {barbershop?.services.map((service) => (
+            <ServiceItem key={service.id} service={service} />
+          ))}
+        </div>
       </div>
     </div>
   )
