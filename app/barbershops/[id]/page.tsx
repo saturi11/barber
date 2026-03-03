@@ -6,6 +6,8 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import ServiceItem from "@/app/_components/serviceItem"
 import PhoneItem from "@/app/_components/phone-item"
+import { Sheet, SheetTrigger } from "@/app/_components/ui/sheet"
+import Sidebar from "@/app/_components/sidebar"
 
 // Define o tipo das props da página.
 // No Next 15+, `params` é uma Promise.
@@ -53,13 +55,18 @@ const BarbershopPage = async ({ params }: PageProps) => {
             <ChevronLeftIcon />
           </Link>
         </Button>
-        <Button
-          size="icon"
-          variant="secondary"
-          className="absolute top-4 right-4"
-        >
-          <MenuIcon />
-        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              size="icon"
+              variant="secondary"
+              className="absolute top-4 right-4"
+            >
+              <MenuIcon />
+            </Button>
+          </SheetTrigger>
+          <Sidebar />
+        </Sheet>
       </div>
       {/*Titulo*/}
       <div className="border-b border-solid p-5">
